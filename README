@@ -1,0 +1,78 @@
+Client: Trip finder
+
+I suspect you all have or have used some sort of GPS device by now, or gotten directions
+from the Googletm map service. Such systems “know” about a network of roads, and given
+two end points (and perhaps some waypoints in between) will pick out a shortest route. This
+next client will be a stripped-down version. Specifically, this program, given a map and a
+request—a sequence of two or more points on the map—will produce a shortest route from
+the first point to the second, third, and so forth.
+
+The map file will be in free format (a sequence of “words” containing no whitespace
+and separated by whitespace—blanks, tabs, newlines, etc.). Information comes in two forms:
+location entries, introduced by the letter ‘L’, and road entries entries, introduced by the letter
+‘R’.
+
+    • Location entries have the form
+        L C X Y
+    where C designates a place and X and Y are floating-point numbers. This means that
+    the place named C is at coordinates (X,Y ) (we’re sort of assuming a flat earth here.)
+    There may only be one location entry for any given C.
+
+    • Distance entries have the form
+        R C0 N L D C1
+    where each Ci designates a place, N is the name of a road L is a numeric distance (a
+    floating-point number), and D is one of the strings NS, EW, WE, SN. Each Ci must be
+    declared in a previous location entry. For example, the entry
+        R Montara US_1 56.0 NS Santa_Cruz
+    would mean that US 1 runs North to South from Montara to Santa Cruz, for a distance
+    of 56.0 miles, and that there are no map points in between (I guess we have a rather
+    idiosyncratically sparse map). Our road connections will all be two way, so the sample
+    entry also indicates a South to North-running route (SN) from Santa Cruz to Montara.
+
+Requests will come from a file each of whose lines contains the names of two or more
+points on the map, separated by commas and whitespace. For example,
+    Berkeley, San_Francisco, Santa_Cruz
+    Santa_Cruz, San_Jose, Stockton
+
+Strip any whitespace from before and after each of these three strings.
+    In response, your program is supposed to print out a route in this format for each request:
+    
+    From Berkeley:
+
+    1. Take University_Ave west for 0.1 miles.
+    2. Take Martin_Luther_King_Jr Way south for 1.2 miles.
+    3. Take Ashby_Ave west for 1.8 miles.
+    4. Take I-580 west for 1.0 miles.
+    5. Take I-80 west for 8.4 miles to San_Francisco.
+    6. Take US-101 south for 34.5 miles.
+    7. Take CA-85 south for 13.3 miles.
+    8. Take CA-17 south for 22.2 miles.
+    9. Take CA-1 north for 1.0 miles to Santa_Cruz.
+
+When two adjacent segments use the same road with the same orientation (NS, EW), join
+them into one segment. So instead of printing
+
+    3. Take Ashby_Ave west for 1.0 miles.
+    4. Take Ashby_Ave west for 0.8 miles.
+    5. ...
+
+print
+
+    3. Take Ashby_Ave west for 1.8 miles.
+    4. ...
+
+As usual, in response to input errors (in format, for example), you should output an error
+message on the standard error output and exit with a non-zero exit code. Do not output to
+the standard error output otherwise.
+
+
+3.1 Running Trip Finder
+
+To run the Tripfinder client, a user will type
+    
+    java trip.Main [ -m MAP ] [ -o OUT ] [ REQUESTS ]
+
+MAP (default Map) is the name of the file containing the map data. REQUESTS (default,
+the standard input) contains the requests. OUT (default, the standard output) receives the
+solution.
+
