@@ -2,15 +2,15 @@ Client: Trip finder
 
 I suspect you all have or have used some sort of GPS device by now, or gotten directions
 from the Googletm map service. Such systems “know” about a network of roads, and given
-two end points (and perhaps some waypoints in between) will pick out a shortest route. This
-next client will be a stripped-down version. Specifically, this program, given a map and a
-request—a sequence of two or more points on the map—will produce a shortest route from
-the first point to the second, third, and so forth.
+two end points (and perhaps some waypoints in between) will pick out a shortest route.
+This next client will be a stripped-down version. Specifically, this program,
+given a map and a request — a sequence of two or more points on the map —
+will produce a shortest route from the first point to the second, third, and so forth.
 
 The map file will be in free format (a sequence of “words” containing no whitespace
-and separated by whitespace—blanks, tabs, newlines, etc.). Information comes in two forms:
-location entries, introduced by the letter ‘L’, and road entries entries, introduced by the letter
-‘R’.
+and separated by whitespace—blanks, tabs, newlines, etc.).
+Information comes in two forms: location entries, introduced by the letter ‘L’,
+and road entries entries, introduced by the letter ‘R’.
 
     • Location entries have the form
         L C X Y
@@ -61,9 +61,9 @@ print
     3. Take Ashby_Ave west for 1.8 miles.
     4. ...
 
-As usual, in response to input errors (in format, for example), you should output an error
-message on the standard error output and exit with a non-zero exit code. Do not output to
-the standard error output otherwise.
+As usual, in response to input errors (in format, for example), you should
+output an error message on the standard error output and exit with a
+non-zero exit code. Do not output to the standard error output otherwise.
 
 
 3.1 Running Trip Finder
@@ -72,7 +72,7 @@ To run the Tripfinder client, a user will type
     
     java trip.Main [ -m MAP ] [ -o OUT ] [ REQUESTS ]
 
-MAP (default Map) is the name of the file containing the map data. REQUESTS (default,
-the standard input) contains the requests. OUT (default, the standard output) receives the
-solution.
+MAP (default Map) is the name of the file containing the map data.
+REQUESTS (default, the standard input) contains the requests.
+OUT (default, the standard output) receives the solution.
 
